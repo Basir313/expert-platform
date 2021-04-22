@@ -330,7 +330,6 @@ export default {
       this.runningProject = Object.values(this.running_p).filter(project => {
         return project.status.includes("running");
       });
-      
     },
 
     editItem(item) {

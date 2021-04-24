@@ -60,7 +60,7 @@
                     <v-row class="mx-sm-3">
                       <v-col cols="12" sm="12" md="8">
                         <v-text-field
-                          v-model="editedItem.create_at"
+                          :value="getDateFromTimeStamp(editedItem.created_at)"
                           :readonly="edit"
                           label="Created At"
                         ></v-text-field>
@@ -99,7 +99,7 @@
                   </v-col>
                 </v-row>
 
-                <v-row>
+                <v-row v-if="editedItem.project_member">
                   <v-col cols="12" md="12" lg="12" sm="12">
                     <v-card-title>
                       <span>Project Members</span>
@@ -150,7 +150,7 @@
                     </v-simple-table>
                   </v-col>
                 </v-row>
-                <v-row>
+                <v-row  v-if="editedItem.project_paid_to_complate">
                   <v-col cols="12" md="12" lg="12" sm="12">
                     <v-card-title>
                       <span>Amount Money that piad for complate project</span>
@@ -263,8 +263,7 @@ export default {
       { text: "Name", value: "title" },
       { text: "Budget", value: "budget" },
       { text: "Category", value: "category", sortable: true },
-      { text: "Estimate Time", value: "estimate_time" },
-      { text: "created", value: "created_at", sortable: true },
+      { text: "Estimate Time", value: "ideal_expert.estimate_time" },
       { text: "Actions", value: "actions", sortable: false }
     ],
     pendingProject: [],
@@ -380,6 +379,9 @@ export default {
         this.pendingProject.push(this.editedItem);
       }
       this.close();
+    },
+    getDateFromTimeStamp(date) {
+      return new Date(date);
     }
   }
 };

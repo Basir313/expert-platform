@@ -1,5 +1,6 @@
 import firebaseapp from "./firebase";
 import store from "../store/index";
+
 const database = firebaseapp.firebase.database();
 
 export default {
@@ -21,5 +22,5 @@ export default {
         result.status = "0";
       });
     return result;
-  },
+  }
 };

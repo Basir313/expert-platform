@@ -33,7 +33,7 @@
                 ><v-icon>mdi-close</v-icon></v-btn
               >
             </v-card-title>
-           <v-card-text class="mt-4">
+            <v-card-text class="mt-4">
               <v-container>
                 <v-row>
                   <v-col cols="6" md="6" lg="6" sm="12">
@@ -56,7 +56,7 @@
                     <v-row class="mx-sm-3">
                       <v-col cols="12" sm="12" md="8">
                         <v-text-field
-                          v-model="editedItem.create_at"
+                          :value="getDateFromTimeStamp(editedItem.created_at)"
                           readonly
                           label="Created At"
                         ></v-text-field>
@@ -95,7 +95,7 @@
                   </v-col>
                 </v-row>
 
-                <v-row>
+                <v-row v-if="editedItem.project_member">
                   <v-col cols="12" md="12" lg="12" sm="12">
                     <v-card-title>
                       <span>Project Members</span>
@@ -136,7 +136,7 @@
                     </v-simple-table>
                   </v-col>
                 </v-row>
-                <v-row>
+                <v-row v-if="editedItem.project_paid_to_complate">
                   <v-col cols="12" md="12" lg="12" sm="12">
                     <v-card-title>
                       <span>Amount Money that piad for complate project</span>
@@ -207,8 +207,12 @@ export default {
       { text: "Name", value: "title" },
       { text: "Budget", value: "budget" },
       { text: "Category", value: "category", sortable: true },
-      { text: "Estimate Time", value: "estimate_time" },
-      { text: "created", value: "created_at", sortable: true },
+      { text: "Type Worked", value: "ideal_expert.type_work" },
+      {
+        text: "Taked time",
+        value: "ideal_expert.estimate_time",
+        sortable: true
+      },
       { text: "Complated", value: "complated_at", sortable: true },
       { text: "Actions", value: "actions", sortable: false }
     ],
@@ -273,9 +277,9 @@ export default {
   methods: {
     initialize() {
       this.complate_P = this.$store.state.projects.projects;
-      this.complateProject = Object.values(this.complate_P).filter(project =>{
-        return project.status.includes("done")
-      })
+      this.complateProject = Object.values(this.complate_P).filter(project => {
+        return project.status.includes("done");
+      });
     },
 
     showItem(item) {
@@ -307,6 +311,9 @@ export default {
         this.pendingProject.push(this.editedItem);
       }
       this.close();
+    },
+    getDateFromTimeStamp(date) {
+      return new Date(date);
     }
   }
 };

@@ -77,28 +77,71 @@
                   <v-col cols="6" md="6" lg="6" sm="12">
                     <v-row class="mx-sm-3">
                       <v-col cols="12" sm="12" md="12">
-                        <v-textarea
-                          v-model="editedItem.description"
+                        <v-text-field
+                          label="Estimated time to done project"
+                          v-model="editedItem.ideal_expert.estimate_time"
                           :readonly="edit"
-                          label="Description"
-                          rows="3"
+                        />
+                        <v-text-field
+                          label="Contract Type for the members of project"
+                          v-model="editedItem.ideal_expert.contract_type"
+                          :readonly="edit"
+                        />
+                        <v-text-field
+                          label="Type of Work"
+                          v-model="editedItem.ideal_expert.type_work"
+                          :readonly="edit"
+                        />
+                        <v-textarea
+                          v-if="!edit"
+                          label="Skill required"
+                          v-model="editedItem.ideal_expert.skills"
+                          :readonly="edit"
                           no-resize
-                        ></v-textarea>
-                      </v-col>
-                      <v-col cols="12" sm="12" md="12">
-                        <v-textarea
-                          v-model="editedItem.ideal_expert"
-                          :readonly="edit"
                           rows="2"
-                          class="pt-3"
-                          no-resize
-                          label="Ideal Expert"
                         ></v-textarea>
+                        <v-subheader
+                          v-if="edit"
+                          class="ml-md-n3 font-weight-bold"
+                          >Skills required</v-subheader
+                        >
+                        <v-divider
+                          v-if="edit"
+                          class="mx-4 ml-md-n1"
+                        ></v-divider>
+                        <v-chip-group
+                          class="ml-md-n1 mt-2"
+                          v-if="edit"
+                          active-class="primary--text"
+                          column
+                        >
+                          <v-chip
+                            v-for="tag in StringToArray(
+                              editedItem.ideal_expert.skills
+                            )"
+                            :key="tag"
+                          >
+                            {{ tag }}
+                          </v-chip>
+                        </v-chip-group>
                       </v-col>
                     </v-row>
                   </v-col>
                 </v-row>
-
+                <v-row
+                  v-if="editedItem.description != null"
+                  class="mx-sm-3 mx-3"
+                >
+                  <v-col cols="12" sm="12" md="12">
+                    <v-textarea
+                      v-model="editedItem.description"
+                      :readonly="edit"
+                      label="Description"
+                      rows="3"
+                      no-resize
+                    ></v-textarea>
+                  </v-col>
+                </v-row>
                 <v-row v-if="editedItem.project_member">
                   <v-col cols="12" md="12" lg="12" sm="12">
                     <v-card-title>
@@ -404,7 +447,7 @@ export default {
         "December"
       ];
       var month = months[date.getMonth()];
-       var days = [
+      var days = [
         "Sunday",
         "Monday",
         "Tuseday",
@@ -416,6 +459,11 @@ export default {
       var day_week_num = days[date.getDay()];
       var day = date.getDate();
       return day_week_num + " " + day + " " + month + " " + year;
+    },
+     // convert String to array
+    StringToArray(text) {
+      var tex = "" + text;
+      return tex.split(" ");
     }
   }
 };

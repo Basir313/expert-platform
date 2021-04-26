@@ -150,7 +150,7 @@
                     </v-simple-table>
                   </v-col>
                 </v-row>
-                <v-row  v-if="editedItem.project_paid_to_complate">
+                <v-row v-if="editedItem.project_paid_to_complate">
                   <v-col cols="12" md="12" lg="12" sm="12">
                     <v-card-title>
                       <span>Amount Money that piad for complate project</span>
@@ -384,8 +384,38 @@ export default {
       }
       this.close();
     },
-    getDateFromTimeStamp(date) {
-      return new Date(date);
+
+    // this method change timestamp which is milisecond to the real date;
+    getDateFromTimeStamp(timeStamp) {
+      var date = new Date(timeStamp);
+      var year = date.getFullYear();
+      var months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ];
+      var month = months[date.getMonth()];
+       var days = [
+        "Sunday",
+        "Monday",
+        "Tuseday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ];
+      var day_week_num = days[date.getDay()];
+      var day = date.getDate();
+      return day_week_num + " " + day + " " + month + " " + year;
     }
   }
 };

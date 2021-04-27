@@ -1,4 +1,5 @@
 import firebase from "./firebase";
+
 const fireDatabase = firebase.firebase.database();
 export default {
   EditLinkdenAccount(userLinkden, userId) {
@@ -35,12 +36,13 @@ export default {
         .set(userInfo)
         .catch(err => {
           return err;
-        }).catch(error =>{
-          console.log(error)
         })
+        .catch(error => {
+          console.log(error);
+        });
     }
   },
-  AddEducation(userId, userInfo){
+  AddEducation(userId, userInfo) {
     const refUserKey = fireDatabase.ref("/users/" + userId + "/").key;
     if (refUserKey == userId) {
       fireDatabase
@@ -48,8 +50,9 @@ export default {
         .child(userInfo.degree)
         .set(userInfo)
         .catch(err => {
-          return err;
-        }).catch(error =>{
+          console.log(err);
+        })
+        .catch(error => {
           console.log(error);
         });
     }

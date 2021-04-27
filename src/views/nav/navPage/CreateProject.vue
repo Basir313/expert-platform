@@ -194,9 +194,7 @@ export default {
       }
     };
   },
-  mounted() {
-    
-  },
+  mounted() {},
   methods: {
     gotCreateProject() {
       if (this.$refs.project_form.validate()) {

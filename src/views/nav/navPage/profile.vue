@@ -164,7 +164,9 @@
                         </h2>
                       </v-list-item-title>
                       <h3 class="mt-3">
-                        <span v-if="item.start_date"> {{ item.start_date }} to {{ item.end_date }} </span>
+                        <span v-if="item.start_date">
+                          {{ item.start_date }} to {{ item.end_date }}
+                        </span>
                       </h3>
                       <v-list-item-subtitle class="mt-3">
                         <span class="font-weight-bold">
@@ -1081,7 +1083,7 @@ export default {
 
     goToEditEducation() {
       if (this.$refs.form_education.validate()) {
-        var userId = fireLogin.getCurrentUser().uid;
+        var userId = this.$store.state.user.user.uid;
         this.education.start_date = this.edu_start_date;
         this.education.end_date = this.edu_end_date;
         createProfile.AddEducation(userId, this.education);

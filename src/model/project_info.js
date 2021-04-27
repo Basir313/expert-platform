@@ -1,6 +1,6 @@
 export default {
-  currency: ["$", "£"],
-  work_type: ["Part Time", "Full Time"],
+  currency: ["AFG", "$", "£"],
+  work_type: ["Work Part Time", "Work Full Time", "Work Remote"],
   project_catagory: [
     "Websit & IT",
     "Mobile Development",

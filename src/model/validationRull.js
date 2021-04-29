@@ -1,8 +1,7 @@
 export default {
   rules: {
     name: [
-      v =>
-        (v || "").length >= 5 || "This field must be at least 50  chracters",
+      v => (v || "").length >= 5 || "This field must be at least 50  chracters",
       v =>
         (v || " ").length <= 60 || "This field must be less than 60 chracters",
       v => /^[ a-zA-Z0-9 ]*$/.test(v) || "This field most be chracters"

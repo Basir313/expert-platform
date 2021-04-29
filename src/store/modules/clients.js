@@ -42,7 +42,7 @@ export const state = {
       work_exper: "2 years",
       project_title: "Healte care"
     }
-  ]
+  ],
 };
 export const mutations = {};
 export const actions = {};
